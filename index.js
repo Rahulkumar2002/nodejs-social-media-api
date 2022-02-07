@@ -12,10 +12,17 @@ const port = 8800;
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
-    console.log("Connected to MongoDB");
-});
+// mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+//     console.log("Connected to MongoDB")
+// }).catch((err) => console.log(err))
 
+const connectToDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URL)
+        console.log("Connected to MongoDB")
+    } catch (err) { console.log(err) }
+}
+connectToDB()
 //Middle ware
 
 //Use to hide crutial data in our http request.
